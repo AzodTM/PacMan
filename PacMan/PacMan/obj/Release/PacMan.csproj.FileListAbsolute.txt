@@ -1,0 +1,5 @@
+C:\Users\Azdod\Dropbox\Distribs\C#\PacMan\PacMan\PacMan\PacMan\bin\Release\PacMan.exe.config
+C:\Users\Azdod\Dropbox\Distribs\C#\PacMan\PacMan\PacMan\PacMan\bin\Release\PacMan.exe
+C:\Users\Azdod\Dropbox\Distribs\C#\PacMan\PacMan\PacMan\PacMan\bin\Release\PacMan.pdb
+C:\Users\Azdod\Dropbox\Distribs\C#\PacMan\PacMan\PacMan\PacMan\obj\Release\PacMan.exe
+C:\Users\Azdod\Dropbox\Distribs\C#\PacMan\PacMan\PacMan\PacMan\obj\Release\PacMan.pdb

@@ -85,7 +85,7 @@ namespace PacMan
 
             while (true)
             {
-
+                string s = "";
                 Console.Clear();
                 map[yPacman, xPacman] = '☺';
                 Console.WriteLine(score);
@@ -93,10 +93,13 @@ namespace PacMan
                 {
                     for (int j = 0; j < 47; j++)
                     {
-                        Console.Write(map[i, j]);
+                         s+= map[i, j];
                     }
-                    Console.WriteLine();
+                    s += '\n';
                 }
+
+                Console.Write(s);
+
                 #region direction/направление
 
                 
@@ -213,7 +216,7 @@ namespace PacMan
                 }
 
 
-                Thread.Sleep(500);   
+                Thread.Sleep(100);   
                 #endregion
                 }
             }
