@@ -4,3 +4,9 @@ C:\Users\Azdod\Dropbox\Distribs\C#\PacMan\PacMan\PacMan\PacMan\bin\Debug\PacMan.
 C:\Users\Azdod\Dropbox\Distribs\C#\PacMan\PacMan\PacMan\PacMan\bin\Debug\PacMan.pdb
 C:\Users\Azdod\Dropbox\Distribs\C#\PacMan\PacMan\PacMan\PacMan\obj\Debug\PacMan.exe
 C:\Users\Azdod\Dropbox\Distribs\C#\PacMan\PacMan\PacMan\PacMan\obj\Debug\PacMan.pdb
+C:\temp\git\Packman2\PacMan\PacMan\bin\Debug\PacMan.exe.config
+C:\temp\git\Packman2\PacMan\PacMan\obj\Debug\PacMan.exe
+C:\temp\git\Packman2\PacMan\PacMan\obj\Debug\PacMan.pdb
+C:\temp\git\Packman2\PacMan\PacMan\bin\Debug\PacMan.exe
+C:\temp\git\Packman2\PacMan\PacMan\bin\Debug\PacMan.pdb
+C:\temp\git\Packman2\PacMan\PacMan\obj\Debug\PacMan.csprojResolveAssemblyReference.cache
