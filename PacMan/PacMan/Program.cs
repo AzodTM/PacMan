@@ -10,7 +10,7 @@ namespace PacMan
 {
     class Program
     {
-        static int[] Enemy (ref string enemyMove,int xEnemy,int yEnemy,int xPac,int yPac, string pacManMove) // принимаем значение направления движения
+        static int[] Enemy (ref string enemyMove,int xEnemy,int yEnemy,int xPac,int yPac, string pacManMove,ref char enemyScore) // принимаем значение направления движения
                                                                                           // координаты врага и пакмена
         {
             string enemyReMove = " ";
@@ -319,7 +319,7 @@ namespace PacMan
 
             int xPacman = 23, yPacman = 45;  //coordinates pacman/координаты Пакмена
             int xEnemy1 = 22, yEnemy1 = 21; //coordinates enemy #1/координаты врага №1
-            char enemy1Score;               //наступил ли враг на *?
+            char enemy1Score = ' ';               //наступил ли враг на *?
             string enemy1move = "moveLeft";                // направление движения врага
             //int xEnemy2 = 20, yEnemy2 = 24;  //coordinates enemy #2/координаты врага №2
             //int xEnemy3 = 25, yEnemy3 = 24;  //coordinates enemy #3/координаты врага №3
@@ -542,7 +542,7 @@ namespace PacMan
                 if (time > 5000)
                 {
                     int[] coordinates = new int[2];
-                    coordinates = Enemy(ref enemy1move, xEnemy1, yEnemy1, xPacman, yPacman,move);
+                    coordinates = Enemy(ref enemy1move, xEnemy1, yEnemy1, xPacman, yPacman,move,ref enemy1Score);
                     map[yEnemy1, xEnemy1] = ' ';
                     yEnemy1 = coordinates[0];
                     xEnemy1 = coordinates[1];
