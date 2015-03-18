@@ -13,7 +13,7 @@ namespace PacMan
         static int[] Enemy (int shift,ref string enemyMove,int xEnemy,int yEnemy,int xPac,int yPac, string pacManMove,char[,] map,ref char[,] enemyScoreCoordinate) // принимаем значение направления движения
                                                                                                                                              // координаты врага и пакмена
         {
-            string enemyReMove = " ";
+            string enemyReMove = " "; //проверка обратного направления
             bool up = false, down = false, left = false, rigth = false; //создание переменных для проверки свободно по сторонам
             int[] coordinates = new int[2]; //таблица для возврата значения координат
             if (enemyMove == "moveLeft")
@@ -30,12 +30,12 @@ namespace PacMan
             }
             else if (enemyMove == "moveDown")
             {
-                enemyReMove = "moveRigth";
+                enemyReMove = "moveUp";
             }
 
 
-           
-            #region control point/контрольные точки
+            //Логика поиска пути на поворотах
+            #region control point/контрольные точки 
             #region move Left
             if (enemyMove == "moveLeft")
             {
@@ -43,23 +43,23 @@ namespace PacMan
                 if (map[yEnemy, xEnemy - 1] == '+' || map[yEnemy, xEnemy - 1] == '|' || //поиск тупика
                     map[yEnemy, xEnemy - 1] == '-')
                 {
-                    if (map[yEnemy - 1, xEnemy] != '+' && map[yEnemy - 1, xEnemy] != '|' &&
+                    if (map[yEnemy - 1, xEnemy] != '+' && map[yEnemy - 1, xEnemy] != '|' && //поиск свободного поворота
                         map[yEnemy - 1, xEnemy] != '-')
                     {
                         up = true;
                     }
-                    if (map[yEnemy + 1, xEnemy] != '+' && map[yEnemy + 1, xEnemy] != '|' &&
+                    if (map[yEnemy + 1, xEnemy] != '+' && map[yEnemy + 1, xEnemy] != '|' && //поиск свободного поворота
                         map[yEnemy + 1, xEnemy] != '-')
                     {
                         down = true;
                     }
-                    if (yPac >= yEnemy)
+                    if (yPac >= yEnemy)  //смена направления движения
                     {
                         if (down == true)
                         {
                             enemyMove = "moveDown";
                         }
-                        else if (up == true)
+                        else if (up == true) //смена направления движения
                         {
                             enemyMove = "moveUp";
                         }
@@ -284,29 +284,34 @@ namespace PacMan
            
             
             #endregion
-
+            //разворот при заходе в зону сквозного прохода 
             #region Разворот
 
             if (map[yEnemy, xEnemy - 1] == '<')
             {
-                enemyMove = "moveRigth";
+                enemyMove = enemyReMove;
             }
             if (map[yEnemy, xEnemy + 1] == '>')
             {
-                enemyMove = "moveLeft";
+                enemyMove = enemyReMove;
             }
             #endregion
 
+
+
+            //подсчет действий если направление движения уже определено
+
             if (enemyMove == "moveLeft")
+            #region смещение влево
             {
 
 
-                if (map[yEnemy, xEnemy - 1] == '*' || map[yEnemy, xEnemy - 1] == 'Ж' || map[yEnemy, xEnemy - 1] == ' ')
+                if (map[yEnemy, xEnemy - 1] == '*' || map[yEnemy, xEnemy - 1] == 'Ж' || map[yEnemy, xEnemy - 1] == ' ')   //проверка что находится в направлении движения
                 {
-                    enemyScoreCoordinate[yEnemy, xEnemy - 1] = map[yEnemy, xEnemy - 1];
+                    enemyScoreCoordinate[yEnemy, xEnemy - 1] = map[yEnemy, xEnemy - 1]; //записываем знак перед собой в отдельный массив
                 }
-                //map[yEnemy, xEnemy] = enemyScore;
-                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);  // отрисовка того что было на месте врага до того как он наступил сюда
                 if (enemyScoreCoordinate[yEnemy,xEnemy] == '*')
                 {
                     Console.WriteLine("*");
@@ -319,11 +324,13 @@ namespace PacMan
                 {
                     Console.WriteLine(" ");
                 }
-                xEnemy--;
-                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                xEnemy--;                                                   //смещение врага по направлению движения
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);          // отрисовка врага в новой позиции
                 Console.WriteLine("☻");
             }
+#endregion
             else if (enemyMove == "moveRigth")
+            #region
             {
 
                 if (map[yEnemy, xEnemy + 1] == '*' || map[yEnemy, xEnemy + 1] == 'Ж' || map[yEnemy, xEnemy + 1] == ' ')
