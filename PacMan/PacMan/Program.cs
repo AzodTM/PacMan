@@ -10,7 +10,7 @@ namespace PacMan
 {
     class Program
     {
-        static int[] Enemy (ref string enemyMove,int xEnemy,int yEnemy,int xPac,int yPac, string pacManMove,ref char enemyScore,char[,] map) // принимаем значение направления движения
+        static int[] Enemy (int shift,ref string enemyMove,int xEnemy,int yEnemy,int xPac,int yPac, string pacManMove,char[,] map,ref char[,] enemyScoreCoordinate) // принимаем значение направления движения
                                                                                                                                              // координаты врага и пакмена
         {
             string enemyReMove = " ";
@@ -36,17 +36,6 @@ namespace PacMan
 
            
             #region control point/контрольные точки
-            //if ((xEnemy == 1 && yEnemy == 9) || (xEnemy == 1 && yEnemy == 45) || (xEnemy == 11 && yEnemy == 1) ||
-            //   (xEnemy == 11 && yEnemy == 9) || (xEnemy == 11 && yEnemy == 15) || (xEnemy == 11 && yEnemy == 27) ||
-            //   (xEnemy == 11 && yEnemy == 39) || (xEnemy == 11 && yEnemy == 45) || (xEnemy == 11 && yEnemy == 53) ||
-            //   (xEnemy == 15 && yEnemy == 9) || (xEnemy == 15 && yEnemy == 27) || (xEnemy == 15 && yEnemy == 45) ||
-            //   (xEnemy == 21 && yEnemy == 9) || (xEnemy == 21 && yEnemy == 19) || (xEnemy == 21 && yEnemy == 35) ||
-            //   (xEnemy == 21 && yEnemy == 45) || (xEnemy == 25 && yEnemy == 9) || (xEnemy == 25 && yEnemy == 19) ||
-            //   (xEnemy == 25 && yEnemy == 35) || (xEnemy == 25 && yEnemy == 45) || (xEnemy == 31 && yEnemy == 9) ||
-            //   (xEnemy == 31 && yEnemy == 27) || (xEnemy == 31 && yEnemy == 45) || (xEnemy == 35 && yEnemy == 1) ||
-            //   (xEnemy == 35 && yEnemy == 9) || (xEnemy == 35 && yEnemy == 15) || (xEnemy == 35 && yEnemy == 27) ||
-            //   (xEnemy == 35 && yEnemy == 39) || (xEnemy == 35 && yEnemy == 45) || (xEnemy == 35 && yEnemy == 53) ||
-            //   (xEnemy == 35 && yEnemy == 9) || (xEnemy == 45 && yEnemy == 45))
             #region move Left
             if (enemyMove == "moveLeft")
             {
@@ -296,7 +285,7 @@ namespace PacMan
             
             #endregion
 
-
+            #region Разворот
 
             if (map[yEnemy, xEnemy - 1] == '<')
             {
@@ -306,75 +295,110 @@ namespace PacMan
             {
                 enemyMove = "moveLeft";
             }
-            
-           
+            #endregion
+
             if (enemyMove == "moveLeft")
             {
+
+
+                if (map[yEnemy, xEnemy - 1] == '*' || map[yEnemy, xEnemy - 1] == 'Ж' || map[yEnemy, xEnemy - 1] == ' ')
+                {
+                    enemyScoreCoordinate[yEnemy, xEnemy - 1] = map[yEnemy, xEnemy - 1];
+                }
+                //map[yEnemy, xEnemy] = enemyScore;
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                if (enemyScoreCoordinate[yEnemy,xEnemy] == '*')
+                {
+                    Console.WriteLine("*");
+                }
+                else if (enemyScoreCoordinate[yEnemy, xEnemy] == 'Ж')
+                {
+                    Console.WriteLine("Ж");
+                }
+                else if (enemyScoreCoordinate[yEnemy, xEnemy] == ' ')
+                {
+                    Console.WriteLine(" ");
+                }
                 xEnemy--;
-                if (map[yEnemy,xEnemy - 1] == '*')
-                {
-                    enemyScore = '*';
-                }
-                else if (map[yEnemy, xEnemy - 1] == 'Ж')
-                {
-                    enemyScore = 'Ж';
-                }
-                else
-                {
-                    enemyScore = ' ';
-                }
-                
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                Console.WriteLine("☻");
             }
             else if (enemyMove == "moveRigth")
             {
+
+                if (map[yEnemy, xEnemy + 1] == '*' || map[yEnemy, xEnemy + 1] == 'Ж' || map[yEnemy, xEnemy + 1] == ' ')
+                {
+                    enemyScoreCoordinate[yEnemy, xEnemy + 1] = map[yEnemy, xEnemy + 1];
+                }
+                //map[yEnemy, xEnemy] = enemyScore;
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                if (enemyScoreCoordinate[yEnemy, xEnemy] == '*')
+                {
+                    Console.WriteLine("*");
+                }
+                else if (enemyScoreCoordinate[yEnemy, xEnemy] == 'Ж')
+                {
+                    Console.WriteLine("Ж");
+                }
+                else if (enemyScoreCoordinate[yEnemy, xEnemy] == ' ')
+                {
+                    Console.WriteLine(" ");
+                }
                 xEnemy++;
-                if (map[yEnemy, xEnemy + 1] == '*')
-                {
-                    enemyScore = '*';
-                }
-                else if (map[yEnemy, xEnemy + 1] == 'Ж')
-                {
-                    enemyScore = 'Ж';
-                }
-                else
-                {
-                    enemyScore = ' ';
-                }
-                
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                Console.WriteLine("☻");
             }
             else if (enemyMove == "moveUp")
             {
+
+
+                if (map[yEnemy - 1, xEnemy] == '*' || map[yEnemy - 1, xEnemy] == 'Ж' || map[yEnemy - 1, xEnemy] == ' ')
+                {
+                    enemyScoreCoordinate[yEnemy - 1, xEnemy] = map[yEnemy - 1, xEnemy];
+                }
+                //map[yEnemy, xEnemy] = enemyScore;
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                if (enemyScoreCoordinate[yEnemy, xEnemy] == '*')
+                {
+                    Console.WriteLine("*");
+                }
+                else if (enemyScoreCoordinate[yEnemy, xEnemy] == 'Ж')
+                {
+                    Console.WriteLine("Ж");
+                }
+                else if (enemyScoreCoordinate[yEnemy, xEnemy] == ' ')
+                {
+                    Console.WriteLine(" ");
+                }
                 yEnemy--;
-                if (map[yEnemy - 1, xEnemy] == '*')
-                {
-                    enemyScore = '*';
-                }
-                else if (map[yEnemy - 1, xEnemy] == 'Ж')
-                {
-                    enemyScore = 'Ж';
-                }
-                else
-                {
-                    enemyScore = ' ';
-                }
-                
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                Console.WriteLine("☻");
             }
             else if (enemyMove == "moveDown")
             {
+
+
+                if (map[yEnemy + 1, xEnemy] == '*' || map[yEnemy + 1, xEnemy] == 'Ж' || map[yEnemy + 1, xEnemy] == ' ')
+                {
+                    enemyScoreCoordinate[yEnemy + 1, xEnemy] = map[yEnemy + 1, xEnemy];
+                }
+               //map[yEnemy, xEnemy] = enemyScore;
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                if (enemyScoreCoordinate[yEnemy, xEnemy] == '*')
+                {
+                    Console.WriteLine("*");
+                }
+                else if (enemyScoreCoordinate[yEnemy, xEnemy] == 'Ж')
+                {
+                    Console.WriteLine("Ж");
+                }
+                else if (enemyScoreCoordinate[yEnemy, xEnemy] == ' ')
+                {
+                    Console.WriteLine(" ");
+                }
                 yEnemy++;
-                if (map[yEnemy + 1, xEnemy] == '*')
-                {
-                    enemyScore = '*';
-                }
-                else if (map[yEnemy + 1, xEnemy] == 'Ж')
-                {
-                    enemyScore = 'Ж';
-                }
-                else
-                {
-                    enemyScore = ' ';
-                }
-                
+                Console.SetCursorPosition(xEnemy, yEnemy + shift);
+                Console.WriteLine("☻");
             }
             
             coordinates[0] = (yEnemy);
@@ -385,14 +409,29 @@ namespace PacMan
         //_________________________________________________________________________________________________________________________________________________________________________
         static void Main(string[] args)
         {
-
+            const  int shift = 2;
+            Console.SetWindowSize(50, 60);
+           
+            char[,] enemyScoreCoordinate = new char[55, 47]; //таблица записывает показания куда идет враг, чтобы не потерять * и Ж  
+            for (int i = 0; i < 55; i++)
+            {
+                for (int j = 0; j < 47; j++)
+                {
+                    enemyScoreCoordinate[i, j] = ' ';
+                }
+            }
+            string s = "";
             int xPacman = 23, yPacman = 45;  //coordinates pacman/координаты Пакмена
-            int xEnemy1 = 22, yEnemy1 = 21; //coordinates enemy #1/координаты врага №1
-            int xEnemy2 = 20, yEnemy2 = 21;  //coordinates enemy #2/координаты врага №2
-            char enemy1Score = ' ';               //наступил ли враг на *?
-            char enemy2Score = ' ';
+            
+            int xEnemy1 = 23, yEnemy1 = 21; //coordinates enemy #1/координаты врага №1
+            
+            int xEnemy2 = 21, yEnemy2 = 21;  //coordinates enemy #2/координаты врага №2
+
+            int xEnemy3 = 25, yEnemy3 = 21;  //coordinates enemy #2/координаты врага №2
+            
             string enemy1move = "moveLeft";                // направление движения врага
             string enemy2move = "moveRigth";
+            string enemy3move = "moveLeft"; 
            
             //int xEnemy3 = 25, yEnemy3 = 24;  //coordinates enemy #3/координаты врага №3
             int time = 0;                    //time/время
@@ -462,29 +501,40 @@ namespace PacMan
             #endregion
 
             string move = "moveUp", tryMove;
+            for (int i = 0; i < 55; i++)
+            {
+                for (int j = 0; j < 47; j++)
+                {
+                    s += map[i, j];
+                }
+                s += '\n';
+            }
+            Console.SetCursorPosition(0, shift);
+            Console.Write(s);
+            Console.SetCursorPosition(xEnemy1, yEnemy1 + shift);
+            Console.WriteLine("☻");
+            Console.SetCursorPosition(xEnemy2, yEnemy2 + shift);
+            Console.WriteLine("☻");
+            Console.SetCursorPosition(xEnemy3, yEnemy3 + shift);
+            Console.WriteLine("☻");
+
 
 
 
 
             while (true)
             {
-                string s = "";
-                Console.Clear();
-                map[yPacman, xPacman] = '☺';
-                map[yEnemy1, xEnemy1] = '☻';
-                map[yEnemy2, xEnemy2] = '†';
+                
+                
+                
+               
+                Console.SetCursorPosition(0, 0);
                 Console.WriteLine("Score/Очки = {0}", score);
+                Console.SetCursorPosition(0, 1);
                 Console.WriteLine("Time/Время = {0} seconds", time / 1000);
-                for (int i = 0; i < 55; i++)
-                {
-                    for (int j = 0; j < 47; j++)
-                    {
-                        s += map[i, j];
-                    }
-                    s += '\n';
-                }
-
-                Console.Write(s);
+                Console.SetCursorPosition(xPacman, yPacman + shift);
+                Console.WriteLine("☺");
+                
 
                 #region direction/направление
 
@@ -540,7 +590,20 @@ namespace PacMan
                             score += 1000;
                         }
                         map[yPacman, xPacman] = ' ';
-                        xPacman = xPacman - 1;
+                        
+                        Console.SetCursorPosition(xPacman, yPacman + shift);
+                        Console.WriteLine(" ");
+                        xPacman--;
+                        
+                        Console.SetCursorPosition(xPacman, yPacman + shift);
+                        Console.WriteLine("☺");
+                        
+                        if (map[yPacman, xPacman] == '<')
+                        {
+                            Console.SetCursorPosition(xPacman, yPacman + shift);
+                            Console.WriteLine("<");
+                        }
+                        
                     }
                 }
                 else if (move == "moveRigth")
@@ -556,7 +619,18 @@ namespace PacMan
                             score += 1000;
                         }
                         map[yPacman, xPacman] = ' ';
-                        xPacman = xPacman + 1;
+                        
+                        Console.SetCursorPosition(xPacman, yPacman + shift);
+                        Console.WriteLine(" ");
+                        xPacman++;
+                        Console.SetCursorPosition(xPacman, yPacman + shift);
+                        Console.WriteLine("☺");
+                        if (map[yPacman, xPacman] == '>')
+                        {
+                            Console.SetCursorPosition(xPacman, yPacman + shift);
+                            Console.WriteLine(">");
+                        }
+                        
                     }
                 }
                 else if (move == "moveUp")
@@ -572,7 +646,13 @@ namespace PacMan
                             score += 1000;
                         }
                         map[yPacman, xPacman] = ' ';
-                        yPacman = yPacman - 1;
+                       
+                        Console.SetCursorPosition(xPacman, yPacman + shift);
+                        Console.WriteLine(" ");
+                        yPacman--;
+                        Console.SetCursorPosition(xPacman, yPacman + shift);
+                        Console.WriteLine("☺");
+                        
                     }
                 }
                 else if (move == "moveDown")
@@ -588,7 +668,13 @@ namespace PacMan
                             score += 1000;
                         }
                         map[yPacman, xPacman] = ' ';
-                        yPacman = yPacman + 1;
+                        
+                        Console.SetCursorPosition(xPacman, yPacman + shift);
+                        Console.WriteLine(" ");
+                        yPacman++;
+                        Console.SetCursorPosition(xPacman, yPacman + shift);
+                        Console.WriteLine("☺");
+                        
                     }
                 }
                 if (yPacman == 27 && xPacman == 46)
@@ -609,6 +695,8 @@ namespace PacMan
                 if (time == 5000)
                 {
                     map[yEnemy1, xEnemy1] = ' ';
+                    Console.SetCursorPosition(xEnemy1, yEnemy1 + shift);
+                    Console.WriteLine(" ");
                     yEnemy1 = yEnemy1 - 2;
                     enemy1move = move;
                 }
@@ -616,8 +704,8 @@ namespace PacMan
                 {
 
                     int[] coordinates = new int[2];
-                    coordinates = Enemy(ref enemy1move, xEnemy1, yEnemy1, xPacman, yPacman,move,ref enemy1Score,map);
-                    map[yEnemy1, xEnemy1] = enemy1Score;
+                    coordinates = Enemy(shift,ref enemy1move, xEnemy1, yEnemy1, xPacman, yPacman,move,map,ref enemyScoreCoordinate);
+                    map[yEnemy1, xEnemy1] = enemyScoreCoordinate[yEnemy1,xEnemy1];
                     yEnemy1 = coordinates[0];
                     xEnemy1 = coordinates[1];
                 }
@@ -626,26 +714,49 @@ namespace PacMan
                 if (time == 10000)
                 {
                     map[yEnemy2, xEnemy2] = ' ';
+                    Console.SetCursorPosition(xEnemy2, yEnemy2 + shift);
+                    Console.WriteLine(" ");
                     yEnemy2 = yEnemy2 - 2;
-                    enemy1move = move;
+                    enemy2move = move;
                 }
                 if (time > 10000)
                 {
 
                     int[] coordinates = new int[2];
-                    coordinates = Enemy(ref enemy2move, xEnemy2, yEnemy2, xPacman, yPacman, move, ref enemy2Score, map);
-                    map[yEnemy2, xEnemy2] = enemy2Score;
+                    coordinates = Enemy(shift,ref enemy2move, xEnemy2, yEnemy2, xPacman, yPacman, move, map,ref enemyScoreCoordinate);
+                    map[yEnemy2, xEnemy2] = enemyScoreCoordinate[yEnemy2,xEnemy2];
                     yEnemy2 = coordinates[0];
                     xEnemy2 = coordinates[1];
                 }
                 #endregion
-                #endregion
-                if (((yEnemy1 == yPacman) && (xEnemy1 == xPacman)) ||  ((yEnemy2 == yPacman) && (xEnemy2 == xPacman)))
+                #region Enemy #2/Враг №3
+                if (time == 15000)
                 {
-                   // Console.Clear();
-                    Console.WriteLine("You Loose");
-                    Console.ReadKey();
-                    break;
+                    map[yEnemy3, xEnemy3] = ' ';
+                    Console.SetCursorPosition(xEnemy3, yEnemy3 + shift);
+                    Console.WriteLine(" ");
+                    yEnemy3 = yEnemy3 - 2;
+                    enemy3move = move;
+                }
+                if (time > 15000)
+                {
+
+                    int[] coordinates = new int[2];
+                    coordinates = Enemy(shift, ref enemy3move, xEnemy3, yEnemy3, xPacman, yPacman, move, map, ref enemyScoreCoordinate);
+                    map[yEnemy3, xEnemy3] = enemyScoreCoordinate[yEnemy3, xEnemy3];
+                    yEnemy3 = coordinates[0];
+                    xEnemy3 = coordinates[1];
+                }
+                #endregion
+                #endregion
+                if ((yEnemy1 == yPacman && xEnemy1 == xPacman) || (yEnemy2 == yPacman && xEnemy2 == xPacman) ||
+                    (yEnemy3 == yPacman && xEnemy3 == xPacman))
+                {
+                    Console.Clear();
+                    Console.SetCursorPosition(18,30);
+                    Console.WriteLine("YOU ARE DEAD!!!");
+                    Thread.Sleep(9999999);
+
                 }
 
 
